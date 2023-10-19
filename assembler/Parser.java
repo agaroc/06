@@ -1,14 +1,15 @@
 package assembler;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
-
 public class Parser
 {
     private String currentLine;
     private String nextLine;
-    private Scanner buff;
+    private BufferedReader buff;
 
     public Parser(File file) throws IOException
     {
@@ -16,17 +17,20 @@ public class Parser
         {
             throw new IOException("invalid file");
         }
-        this.buff = new Scanner(file);
+        if (!file.exists()) {
+			throw new FileNotFoundException(file.getAbsolutePath());
+		}
+        this.buff = new BufferedReader(new FileReader(file));
         this.currentLine = null;
         this.nextLine = this.getNext();
     }
 
     private String getNext() throws IOException
     {
-        String nextLine = "";
+        String nextLine;
         do
         {
-            nextLine = this.buff.nextLine();
+            nextLine = this.buff.readLine();
             if(nextLine == null)
             {
                 return null;
@@ -47,16 +51,17 @@ public class Parser
     }
 
     @Override
-    public void finalize()
+    public void finalize() throws IOException
     {
         this.close();
     }
 
-    public void close()
-    {
-        this.buff.close();
-    }
-
+    public void close() {
+		try {
+			this.buff.close();
+		} catch (IOException e) {
+		}
+	}
     public boolean moreCommands()
     {
         return (this.nextLine != null);
@@ -85,7 +90,7 @@ public class Parser
         }
     }
 
-    public String destination()
+    public String dest()
     {
         String line = this.currentLine.trim();
         int index = line.indexOf("=");

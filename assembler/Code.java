@@ -77,7 +77,7 @@ public class Code
     {
         if(input == null || input.isEmpty())
         {
-            input = "null";
+            input = "NULL";
         }
         return this.destMncs.get(input);
     }
@@ -91,7 +91,7 @@ public class Code
     {
         if(input == null || input.isEmpty())
         {
-            input = "null";
+            input = "NULL";
         }
         return this.jmpMncs.get(input);
     }

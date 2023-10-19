@@ -86,7 +86,7 @@ public class Assembler
             else if(command.equals(CommandType.C_COMMAND))
             {
                 String comp = parser.comp();
-                String dest = parser.destination();
+                String dest = parser.dest();
                 String jump = parser.jump();
                 instruction = this.formatC(comp, dest, jump);
             }

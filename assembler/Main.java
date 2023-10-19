@@ -34,7 +34,6 @@ public class Main
             }
             output.createNewFile();
 
-            long startTime = System.currentTimeMillis();
             Assembler assembler = new Assembler(source, output);
             assembler.translate();
 
