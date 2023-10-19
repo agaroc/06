@@ -1,3 +1,6 @@
+/*Caleb Ng
+ * Main Class
+ */
 package assembler;
 
 import java.io.File;
